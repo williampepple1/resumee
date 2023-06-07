@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// src/components/ResumeForm.tsx
 import React from 'react';
 import TextField from './TextField';
 import ExperienceForm from './ExperienceForm';
@@ -8,7 +6,7 @@ import { Resume, createEmptyEducation, createEmptyExperience } from '../typings'
 
 interface ResumeFormProps {
   resume: Resume;
-  setResume: (resume: Resume) => void;
+  setResume: React.Dispatch<React.SetStateAction<Resume>>;
 }
 
 const ResumeForm: React.FC<ResumeFormProps> = ({ resume, setResume }) => {
@@ -38,19 +36,19 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ resume, setResume }) => {
   };
 
   const handleAddExperience = () => {
-    setResume((prevResume: { experiences: any; }) => ({
+    setResume((prevResume: Resume) => ({
       ...prevResume,
       experiences: [...prevResume.experiences, createEmptyExperience()],
     }));
   };
-
+  
   const handleAddEducation = () => {
-    setResume((prevResume: { educations: any; }) => ({
+    setResume((prevResume: Resume) => ({
       ...prevResume,
       educations: [...prevResume.educations, createEmptyEducation()],
     }));
   };
-
+  
   return (
     <form>
       <TextField label="First Name" name="firstName" value={resume.firstName} onChange={handleInputChange} />
